@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 08:52:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/15 10:28:55 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/07/16 13:56:17 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/push_swap.h"
+#include "philo.h"
 
 static char	*remove_signs(char *str, int *sign)
 {
