@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:47 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/17 11:44:55 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/07/20 12:54:51 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ int	main(int ac, char **av)
 {
 	int	*arguments;
 
-	(void)av;
 	if (ac < 5 || ac > 6)
 		return (0);
-	arguments = malloc(sizeof(int) * ac);
-	arguments[0] = av[1];
-	philosophers(arguments);
+	arguments = parser(av, ac - 1);
+	if (!arguments)
+		return (0);
+	printf("It's ok !");
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/17 11:31:26 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/07/20 13:01:45 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 # include <stdlib.h>
 # include <limits.h>
 
-int	ft_atoi(const char *nptr);
+int	*parser(char **args, int len);
+int	ft_atol(char *str, int *out);
 #endif
