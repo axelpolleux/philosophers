@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/15 07:51:47 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/17 11:44:55 by apolleux         ###   ########.fr       */
+/*   Created: 2026/07/20 10:10:32 by axel              #+#    #+#             */
+/*   Updated: 2026/07/20 10:12:42 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h>
 
-int	main(int ac, char **av)
+int	parser(char **args)
 {
-	int	*arguments;
-
-	(void)av;
-	if (ac < 5 || ac > 6)
-		return (0);
-	arguments = malloc(sizeof(int) * ac);
-	arguments[0] = av[1];
-	philosophers(arguments);
+	return (1);
 }
