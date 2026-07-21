@@ -1,5 +1,5 @@
 CC				:=	cc
-CFLAGS			:=	-Wall -Werror -Wextra -pthread -g
+CFLAGS			:=	-Wall -Werror -Wextra -pthread -g -fsanitize=threads
 NAME			:=	philo
 
 SRCS			:=	main.c		\
