@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 10:10:32 by axel              #+#    #+#             */
-/*   Updated: 2026/07/20 17:23:41 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/21 17:22:45 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	*parser(char **args, int len)
 	int	i;
 	int	*res;
 
-	i = 0;
+	i = 1;
 	res = malloc(sizeof(int) * len);
-	while (args[i + 1])
+	while (args[i])
 	{
-		if (!ft_atol(args[i + 1], &res[i]) || !is_nb(args[i + 1]) || res < 0)
+		if (!ft_atol(args[i], &res[i - 1]) || !is_nb(args[i]) || res < 0)
 			return (0);
 		i++;
 	}
