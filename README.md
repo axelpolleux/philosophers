@@ -27,12 +27,13 @@ For example : `./philo 200 190 50 40 20`, means
 - Time to die : 190
 - Time to eat : 50
 - Time to sleep : 40
-- Number of times each philosopher must eat : 20 (optional)
+- Number of times each philosopher must eat: 20 (optional)
 
 # Resources
 Even though most of my ideas come from other students' advice, here are the resources that helped me much through this project.
 ### Articles
-[This medium article that explained me the principle of philosophers](https://medium.com/@denaelgammal/dining-philosophers-problem-42-project-guide-mandatory-part-a20fb8dc530e)
+[Dining Philosophers problem. 42 project guide](https://medium.com/@denaelgammal/dining-philosophers-problem-42-project-guide-mandatory-part-a20fb8dc530e) \
+[Threads, Mutexes and Concurrent Programming in C](https://www.codequoi.com/en/threads-mutexes-and-concurrent-programming-in-c/)
 
 ### AI usage
 I've mainly used Claude AI to help me understand some algorithmic issues *(especially about the mutexes between threads)*.

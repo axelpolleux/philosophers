@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:47 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/21 17:20:02 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/22 18:18:37 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int	main(int ac, char **av)
 	arguments = parser(av, ac - 1);
 	if (!arguments)
 		return (0);
-	int	i = 0;
-	while (arguments[i])
-	{
-		printf("%d\n", arguments[i]);
-		i++;
-	}
+	philosophers(arguments);
 	return (1);
 }
