@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/22 18:39:03 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/23 17:50:53 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,21 @@ void	*executions(void *arg)
 	return (NULL);
 }
 
-void	philosophers(int *arguments)
+void	philosophers(t_data *args)
 {
-	int	i;
+	pthread_t	thread;
+	int			i;
 
 	i = 0;
-	(void)arguments;
-	pthread_t	thread;
 
-	while (i < arguments[0])
+	while (i < args->nb_philo)
 	{
 		pthread_create(&thread, NULL, executions, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < args->nb_philo)
+	{
 		pthread_join(thread, NULL);
 		i++;
 	}

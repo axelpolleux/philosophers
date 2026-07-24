@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/22 18:18:10 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/23 09:50:40 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,17 @@
 # include <stdio.h>
 # include <limits.h>
 
-int	*parser(char **args, int len);
-int	ft_atol(char *str, int *out);
-void	philosophers(int *arguments);
+typedef struct s_data
+{
+	int	nb_philo;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	nb_eat;
+} t_data;
+
+t_data	*parser(char **args, int len);
+int		ft_atol(char *str, int *out);
+void	philosophers(t_data *arguments);
 
 #endif

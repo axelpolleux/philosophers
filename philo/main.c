@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:47 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/22 18:18:37 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/23 15:46:13 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 
 int	main(int ac, char **av)
 {
-	int	*arguments;
+	t_data	*args;
 
 	if (ac < 5 || ac > 6)
 		return (0);
-	arguments = parser(av, ac - 1);
-	if (!arguments)
-		return (0);
-	philosophers(arguments);
-	return (1);
+	args = parser(av, ac - 1);
+	if (!args)
+		return (1);
+	printf("%d\n", args->nb_philo);
+	printf("%d\n", args->time_to_die);
+	printf("%d\n", args->time_to_eat);
+	printf("%d\n", args->time_to_sleep);
+	printf("%d\n", args->nb_eat);
+	philosophers(args);
+	return (0);
 }

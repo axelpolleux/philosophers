@@ -6,17 +6,19 @@
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 10:10:32 by axel              #+#    #+#             */
-/*   Updated: 2026/07/22 10:12:54 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/23 16:50:39 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	is_nb(char *str)
+static int	is_nb(char *str)
 {
 	int	i;
 
 	i = 0;
+	if (!str[0])
+		return (0);
 	while (str[i])
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
@@ -26,18 +28,38 @@ int	is_nb(char *str)
 	return (1);
 }
 
-int	*parser(char **args, int len)
+static void	define_data(char **args, int len, t_data *data)
 {
-	int	i;
-	int	*res;
+	ft_atol(args[1], &data->nb_philo);
+	ft_atol(args[2], &data->time_to_die);
+	ft_atol(args[3], &data->time_to_eat);
+	ft_atol(args[4], &data->time_to_sleep);
+	if (len == 5)
+		ft_atol(args[5], &data->nb_eat);
+	else
+		data->nb_eat = -1;
+}
+
+t_data	*parser(char **args, int len)
+{
+	int		i;
+	int		tmp;
+	t_data	*res;
 
 	i = 1;
-	res = malloc(sizeof(int) * len);
+	tmp = 0;
+	res = malloc(sizeof(t_data));
+	if (!res)
+		return (0);
 	while (args[i])
 	{
-		if (!ft_atol(args[i], &res[i - 1]) || !is_nb(args[i]) || res < 0)
+		if (!is_nb(args[i]) || !ft_atol(args[i], &tmp) || tmp < 0)
+		{
+			free(res);
 			return (0);
+		}
 		i++;
 	}
+	define_data(args, len, res);
 	return (res);
 }
