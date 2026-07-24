@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/23 09:50:40 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/24 15:38:30 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,19 @@ typedef struct s_data
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	nb_eat;
-} t_data;
+}	t_data;
+
+typedef struct s_philo
+{
+	int				nb_eat;
+	int				id;
+	long			last_meal;
+	t_data			*arguments;
+	pthread_t		thread;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*mutex_stat;
+}	t_philo;
 
 t_data	*parser(char **args, int len);
 int		ft_atol(char *str, int *out);
