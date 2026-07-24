@@ -5,6 +5,7 @@ NAME			:=	philo
 SRCS			:=	main.c		\
 					numbers.c	\
 					philo.c		\
+					thread.c	\
 					parser.c
 
 OBJS			:=	$(SRCS:.c=.o)

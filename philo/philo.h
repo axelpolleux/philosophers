@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/24 15:38:30 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/24 17:25:29 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,8 @@ typedef struct s_philo
 t_data	*parser(char **args, int len);
 int		ft_atol(char *str, int *out);
 void	philosophers(t_data *arguments);
+void	*philo_routine(void *arg);
+
+void	philo_thread(t_data *args, t_philo philo);
 
 #endif
