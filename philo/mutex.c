@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.c                                          :+:      :+:    :+:   */
+/*   mutex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/24 17:07:32 by axel              #+#    #+#             */
-/*   Updated: 2026/07/27 16:14:03 by axel             ###   ########.fr       */
+/*   Created: 2026/07/27 16:14:28 by axel              #+#    #+#             */
+/*   Updated: 2026/07/27 17:03:13 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	create_threads(t_philo *philos, t_data *args)
+void	init_mutexes(t_data *args)
 {
 	int	i;
 
 	i = 0;
 	while (i < args->nb_philo)
 	{
-		pthread_create(&philos[i].thread, NULL, philo_routine, &philos[i]);
+		pthread_mutex_init(&args->forks[i], NULL);
 		i++;
 	}
 }
 
-void	join_threads(t_philo *philos, t_data *args)
+void	destroy_mutexes(t_data *args)
 {
 	int	i;
 
 	i = 0;
 	while (i < args->nb_philo)
 	{
-		pthread_join(philos[i].thread, NULL);
+		pthread_mutex_destroy(&args->forks[i]);
 		i++;
 	}
 }

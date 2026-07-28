@@ -3,10 +3,11 @@ CFLAGS			:=	-Wall -Werror -Wextra -pthread -g -fsanitize=address
 NAME			:=	philo
 
 SRCS			:=	main.c		\
-					numbers.c	\
+					utils.c		\
 					philo.c		\
 					thread.c	\
-					parser.c
+					parser.c	\
+					mutex.c
 
 OBJS			:=	$(SRCS:.c=.o)
 
