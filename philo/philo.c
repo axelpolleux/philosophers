@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/28 10:15:04 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/28 15:07:58 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,13 @@ void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 
-	philo  = (t_philo *)arg;
-	
+	philo = (t_philo *)arg;
+	pthread_mutex_lock(philo->right_fork);
+	pthread_mutex_lock(philo->left_fork);
+	printf("%d is eating\n", philo->id);
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
+	(void)philo;
 	return (NULL);
 }
 
