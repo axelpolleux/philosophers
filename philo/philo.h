@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/29 11:46:37 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/29 17:27:27 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	int				nb_eat;
 	long			start_time;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	*meal_mutexes;
 	pthread_mutex_t	print_mutex;
 }	t_data;
 
