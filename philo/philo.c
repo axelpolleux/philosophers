@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/28 15:07:58 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/29 14:11:40 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,26 @@ static void	init_philo(t_data *args, t_philo *philos)
 	}
 }
 
+void	print_philo(t_philo *philo, char *status)
+{
+	long	timestamp;
+
+	timestamp = get_time_ms() - philo->arguments->start_time;
+	pthread_mutex_lock(&philo->arguments->print_mutex);
+	printf("%ld %d %s\n", timestamp, philo->id, status);
+	pthread_mutex_unlock(&philo->arguments->print_mutex);
+
+}
+
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	pthread_mutex_lock(philo->right_fork);
-	pthread_mutex_lock(philo->left_fork);
-	printf("%d is eating\n", philo->id);
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
-	(void)philo;
+
+	if (philo->id % 2)
+		ft_usleep(10, philo);
+	print_philo(philo, FORK);
 	return (NULL);
 }
 

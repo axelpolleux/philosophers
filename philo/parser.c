@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 10:10:32 by axel              #+#    #+#             */
-/*   Updated: 2026/07/23 16:50:39 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/29 11:29:00 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	is_nb(char *str)
 
 static void	define_data(char **args, int len, t_data *data)
 {
+	data->start_time = get_time_ms();
 	ft_atol(args[1], &data->nb_philo);
 	ft_atol(args[2], &data->time_to_die);
 	ft_atol(args[3], &data->time_to_eat);

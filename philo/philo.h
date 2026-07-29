@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/28 09:33:46 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/29 11:46:37 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <stdio.h>
 # include <limits.h>
 
+# define FORK	"has taken a fork"
+# define EAT	"is eating"
+# define THINK	"is thinking"
+# define SLEEP	"is sleeping"
+# define DEAD	"died"
+
 typedef struct s_data
 {
 	int				nb_philo;
@@ -27,7 +33,9 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_eat;
+	long			start_time;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	print_mutex;
 }	t_data;
 
 typedef struct s_philo
@@ -55,4 +63,7 @@ void	destroy_mutexes(t_data *args);
 void	create_threads(t_philo *philos, t_data *args);
 void	join_threads(t_philo *philos, t_data *args);
 
+// utils
+long	get_time_ms(void);
+void	ft_usleep(long ms, t_philo *philo);
 #endif
