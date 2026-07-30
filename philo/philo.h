@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/30 15:49:04 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/30 18:57:07 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ typedef struct s_data
 	long			start_time;
 	int				is_dead;
 	pthread_mutex_t	stop;
+	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*meal_mutexes;
-	pthread_mutex_t	print_mutex;
 }	t_data;
 
 typedef struct s_philo
@@ -65,6 +65,7 @@ void	destroy_mutexes(t_data *args);
 // threads
 void	create_threads(t_philo *philos, t_data *args);
 void	join_threads(t_philo *philos, t_data *args);
+int		is_finished(t_philo *philo);
 
 // utils
 long	get_time_ms(void);

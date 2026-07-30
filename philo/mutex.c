@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 16:14:28 by axel              #+#    #+#             */
-/*   Updated: 2026/07/30 15:58:17 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/30 19:11:42 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ void	destroy_mutexes(t_data *args)
 	int	i;
 
 	i = 0;
+	pthread_mutex_destroy(&args->print_mutex);
+	pthread_mutex_destroy(&args->stop);
 	while (i < args->nb_philo)
 	{
-		pthread_mutex_destroy(&args->print_mutex);
 		pthread_mutex_destroy(&args->forks[i]);
 		pthread_mutex_destroy(&args->meal_mutexes[i]);
 		i++;

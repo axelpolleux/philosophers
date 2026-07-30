@@ -30,7 +30,6 @@ static int	is_nb(char *str)
 
 static void	define_data(char **args, int len, t_data *data)
 {
-	data->start_time = get_time_ms();
 	ft_atol(args[1], &data->nb_philo);
 	ft_atol(args[2], &data->time_to_die);
 	ft_atol(args[3], &data->time_to_eat);

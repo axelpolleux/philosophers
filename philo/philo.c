@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/30 15:57:45 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/30 19:14:04 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_philo(t_data *args, t_philo *philos)
 	{
 		philos[i].nb_eat = 0;
 		philos[i].id = i + 1;
-		philos[i].last_meal = 0;
+		philos[i].last_meal = args->start_time;
 		philos[i].arguments = args;
 		philos[i].thread = NULL;
 		philos[i].left_fork = &args->forks[i];
@@ -40,8 +40,8 @@ void	print_philo(t_philo *philo, char *status)
 	pthread_mutex_lock(&philo->arguments->stop);
 	if (!philo->arguments->is_dead)
 		printf("%ld %d %s\n", timestamp, philo->id, status);
-	pthread_mutex_unlock(&philo->arguments->print_mutex);
 	pthread_mutex_unlock(&philo->arguments->stop);
+	pthread_mutex_unlock(&philo->arguments->print_mutex);
 
 }
 
@@ -71,9 +71,30 @@ void	*philo_routine(void *arg)
 
 	if (philo->id % 2)
 		ft_usleep(10, philo);
-	while (1)
+	while (!philo->arguments->is_dead)
 		content_routine(philo);
 	return (NULL);
+}
+
+static void	monitor(t_data *args, t_philo *philo)
+{
+	int	i;
+
+	while (!args->is_dead)
+	{
+		i = 0;
+		while (i < args->nb_philo)
+		{
+			if (is_finished(&philo[i]))
+			{
+				pthread_mutex_lock(&args->stop);
+				args->is_dead = 1;
+				pthread_mutex_unlock(&args->stop);
+				print_philo(&philo[i], DEAD);
+			}
+			i++;
+		}
+	}
 }
 
 void	philosophers(t_data *args)
@@ -85,9 +106,12 @@ void	philosophers(t_data *args)
 	philos = malloc(sizeof(t_philo) * args->nb_philo);
 	init_mutexes(args);
 	init_philo(args, philos);
+	args->start_time = get_time_ms();
 	create_threads(philos, args);
+	monitor(args, philos);
 	join_threads(philos, args);
 	destroy_mutexes(args);
+	free(args->meal_mutexes);
 	free(args->forks);
 	free(philos);
 }
