@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 10:10:32 by axel              #+#    #+#             */
-/*   Updated: 2026/07/29 11:29:00 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/30 15:46:57 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	define_data(char **args, int len, t_data *data)
 		ft_atol(args[5], &data->nb_eat);
 	else
 		data->nb_eat = -1;
+	data->is_dead = 0;
 }
 
 t_data	*parser(char **args, int len)

@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 11:38:35 by axel              #+#    #+#             */
-/*   Updated: 2026/07/29 14:13:00 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/30 16:53:14 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,14 @@ void	ft_usleep(long ms, t_philo *philo)
 	(void)philo;
 	start = get_time_ms();
 	while (get_time_ms() - start < ms)
-		usleep(1);
+		// if (is_finished(philo))
+		// 	break ;
+		usleep(500);
+}
+
+int	is_finished(long ms, t_philo philo)
+{
+	if (get_time_ms() - philo.last_meal > philo.arguments->time_to_die)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 16:14:28 by axel              #+#    #+#             */
-/*   Updated: 2026/07/29 17:37:53 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/30 15:58:17 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_mutexes(t_data *args)
 
 	i = 0;
 	pthread_mutex_init(&args->print_mutex, NULL);
+	pthread_mutex_init(&args->stop, NULL);
 	while (i < args->nb_philo)
 	{
 		pthread_mutex_init(&args->forks[i], NULL);

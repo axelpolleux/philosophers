@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/29 17:32:54 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/30 15:57:45 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,30 @@ void	print_philo(t_philo *philo, char *status)
 
 	timestamp = get_time_ms() - philo->arguments->start_time;
 	pthread_mutex_lock(&philo->arguments->print_mutex);
-	printf("%ld %d %s\n", timestamp, philo->id, status);
+	pthread_mutex_lock(&philo->arguments->stop);
+	if (!philo->arguments->is_dead)
+		printf("%ld %d %s\n", timestamp, philo->id, status);
 	pthread_mutex_unlock(&philo->arguments->print_mutex);
+	pthread_mutex_unlock(&philo->arguments->stop);
 
 }
 
 void	content_routine(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fork);
-	print_philo(philo, FORK);
-	pthread_mutex_lock(philo->left_fork);
-	print_philo(philo, FORK);
-	pthread_mutex_lock(philo->mutex_stat);
-	philo->last_meal = get_time_ms();
-	pthread_mutex_unlock(philo->mutex_stat);
-	print_philo(philo, EAT);
-	ft_usleep(philo->arguments->time_to_eat, philo);
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
-	print_philo(philo, SLEEP);
-	ft_usleep(philo->arguments->time_to_sleep, philo);
-	print_philo(philo, THINK);
+		pthread_mutex_lock(philo->right_fork);
+		print_philo(philo, FORK);
+		pthread_mutex_lock(philo->left_fork);
+		print_philo(philo, FORK);
+		pthread_mutex_lock(philo->mutex_stat);
+		philo->last_meal = get_time_ms();
+		pthread_mutex_unlock(philo->mutex_stat);
+		print_philo(philo, EAT);
+		ft_usleep(philo->arguments->time_to_eat, philo);
+		pthread_mutex_unlock(philo->right_fork);
+		pthread_mutex_unlock(philo->left_fork);
+		print_philo(philo, SLEEP);
+		ft_usleep(philo->arguments->time_to_sleep, philo);
+		print_philo(philo, THINK);
 }
 
 void	*philo_routine(void *arg)
@@ -68,7 +71,8 @@ void	*philo_routine(void *arg)
 
 	if (philo->id % 2)
 		ft_usleep(10, philo);
-	content_routine(philo);
+	while (1)
+		content_routine(philo);
 	return (NULL);
 }
 
