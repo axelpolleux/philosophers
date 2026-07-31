@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 11:38:35 by axel              #+#    #+#             */
-/*   Updated: 2026/07/30 19:02:13 by axel             ###   ########.fr       */
+/*   Updated: 2026/07/31 11:38:56 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,11 @@ int	is_finished(t_philo *philo)
 	if (get_time_ms() - last_meal > philo->arguments->time_to_die)
 		return (1);
 	return (0);
+}
+
+int	is_over(t_data *args)
+{
+	int	is_dead;
+
+
 }
