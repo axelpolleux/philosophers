@@ -6,7 +6,7 @@
 /*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 11:38:35 by axel              #+#    #+#             */
-/*   Updated: 2026/07/31 11:38:56 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/07/31 15:58:32 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_usleep(long ms, t_philo *philo)
 	start = get_time_ms();
 	while (get_time_ms() - start < ms)
 	{
-		if (is_finished(philo))
+		if (is_over(philo->arguments))
 			break ;
 		usleep(500);
 	}
@@ -87,7 +87,10 @@ int	is_finished(t_philo *philo)
 
 int	is_over(t_data *args)
 {
-	int	is_dead;
+	int	res;
 
-
+	pthread_mutex_lock(&args->stop);
+	res = args->is_dead;
+	pthread_mutex_unlock(&args->stop);
+	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/31 11:19:06 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/07/31 15:16:39 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,30 @@ static void	init_philo(t_data *args, t_philo *philos)
 
 void	content_routine(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fork);
+	pthread_mutex_t	*first;
+	pthread_mutex_t	*second;
+
+	if (philo->id % 2)
+	{
+		first = philo->right_fork;
+		second = philo->left_fork;
+	}
+	else
+	{
+		first = philo->left_fork;
+		second = philo->right_fork;
+	}
+	pthread_mutex_lock(first);
 	print_philo(philo, FORK);
-	pthread_mutex_lock(philo->left_fork);
+	pthread_mutex_lock(second);
 	print_philo(philo, FORK);
 	pthread_mutex_lock(philo->mutex_stat);
 	philo->last_meal = get_time_ms();
 	pthread_mutex_unlock(philo->mutex_stat);
 	print_philo(philo, EAT);
 	ft_usleep(philo->arguments->time_to_eat, philo);
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(second);
+	pthread_mutex_unlock(first);
 	print_philo(philo, SLEEP);
 	ft_usleep(philo->arguments->time_to_sleep, philo);
 	print_philo(philo, THINK);
@@ -56,7 +69,7 @@ void	*philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2)
 		ft_usleep(10, philo);
-	while (!philo->arguments->is_dead)
+	while (!is_over(philo->arguments))
 		content_routine(philo);
 	return (NULL);
 }
@@ -65,7 +78,7 @@ static void	monitor(t_data *args, t_philo *philo)
 {
 	int	i;
 
-	while (!args->is_dead)
+	while (!is_over(args))
 	{
 		i = 0;
 		while (i < args->nb_philo)
@@ -73,13 +86,14 @@ static void	monitor(t_data *args, t_philo *philo)
 			if (is_finished(&philo[i]))
 			{
 				pthread_mutex_lock(&args->stop);
+				print_philo(&philo[i], DEAD);
 				args->is_dead = 1;
 				pthread_mutex_unlock(&args->stop);
-				print_philo(&philo[i], DEAD);
 			}
 			i++;
 		}
 	}
+	usleep(1000);
 }
 
 void	philosophers(t_data *args)

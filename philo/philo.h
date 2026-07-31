@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/31 11:13:18 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/07/31 14:07:29 by axel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ void	join_threads(t_philo *philos, t_data *args);
 void	print_philo(t_philo *philo, char *status);
 int		is_finished(t_philo *philo);
 
+
 // utils
 long	get_time_ms(void);
 void	ft_usleep(long ms, t_philo *philo);
+int		is_over(t_data *args);
 #endif
