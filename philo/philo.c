@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/31 15:16:39 by axel             ###   ########.fr       */
+/*   Updated: 2026/08/01 18:38:40 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void	philosophers(t_data *args)
 	args->meal_mutexes = malloc(sizeof(pthread_mutex_t) * args->nb_philo);
 	philos = malloc(sizeof(t_philo) * args->nb_philo);
 	init_mutexes(args);
-	init_philo(args, philos);
 	args->start_time = get_time_ms();
+	init_philo(args, philos);
 	create_threads(philos, args);
 	monitor(args, philos);
 	join_threads(philos, args);

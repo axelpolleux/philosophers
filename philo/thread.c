@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.c                                          :+:      :+:    :+:   */
+/*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
+/*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 17:07:32 by axel              #+#    #+#             */
-/*   Updated: 2026/07/31 15:42:46 by axel             ###   ########.fr       */
+/*   Updated: 2026/08/01 17:55:06 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_philo(t_philo *philo, char *status)
 	long	timestamp;
 
 	pthread_mutex_lock(&philo->arguments->print_mutex);
-	if (!philo->arguments->is_dead)
+	if (!is_over(philo->arguments))
 	{
 		timestamp = get_time_ms() - philo->arguments->start_time;
 		printf("%ld %d %s\n", timestamp, philo->id, status);

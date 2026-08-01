@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axel <axel@student.1337.ma>                +#+  +:+       +#+        */
+/*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 11:38:35 by axel              #+#    #+#             */
-/*   Updated: 2026/07/31 15:58:32 by axel             ###   ########.fr       */
+/*   Updated: 2026/08/01 14:59:18 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	ft_usleep(long ms, t_philo *philo)
 {
 	long	start;
 
-	(void)philo;
 	start = get_time_ms();
 	while (get_time_ms() - start < ms)
 	{
