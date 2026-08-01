@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:47 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/01 18:44:48 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/01 19:23:03 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	main(int ac, char **av)
 	if (!args)
 		return (1);
 	philosophers(args);
+	free(args);
 	return (0);
 }
