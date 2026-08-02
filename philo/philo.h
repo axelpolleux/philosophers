@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/02 17:00:21 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 18:46:39 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	destroy_mutexes(t_data *args);
 void	create_threads(t_philo *philos, t_data *args);
 void	join_threads(t_philo *philos, t_data *args);
 void	print_philo(t_philo *philo, char *status);
-void	philo_alone(t_data *args);
+void	philo_alone(t_philo *philo);
 void	*philo_routine(void *arg);
 
 // utils

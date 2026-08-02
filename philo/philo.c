@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/02 18:08:48 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 19:09:27 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	content_routine(t_philo *philo)
 	print_philo(philo, FORK);
 	pthread_mutex_lock(philo->mutex_stat);
 	philo->last_meal = get_time_ms();
+	philo->nb_eat++;
 	pthread_mutex_unlock(philo->mutex_stat);
 	print_philo(philo, EAT);
 	ft_usleep(philo->arguments->time_to_eat, philo);
@@ -73,6 +74,11 @@ void	*philo_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->arguments->nb_philo == 1)
+	{
+		philo_alone(philo);
+		return (NULL);
+	}
 	if (philo->id % 2)
 		ft_usleep(10, philo);
 	while (!is_over(philo->arguments))

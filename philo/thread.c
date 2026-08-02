@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 17:07:32 by axel              #+#    #+#             */
-/*   Updated: 2026/08/01 17:55:06 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 18:58:56 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,13 @@ void	print_philo(t_philo *philo, char *status)
 		printf("%ld %d %s\n", timestamp, philo->id, status);
 	}
 	pthread_mutex_unlock(&philo->arguments->print_mutex);
+}
+
+void	philo_alone(t_philo *philo)
+{
+	pthread_mutex_lock(philo->right_fork);
+	print_philo(philo, FORK);
+	while (!is_over(philo->arguments))
+		usleep(500);
+	pthread_mutex_unlock(philo->right_fork);
 }

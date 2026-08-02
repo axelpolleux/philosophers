@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 15:34:34 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/02 16:59:41 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 19:44:10 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	monitor(t_data *args, t_philo *philo)
 {
 	int	i;
+	int	happy_meal;
 
 	while (!is_over(args))
 	{
 		i = 0;
+		happy_meal = 0;
 		while (i < args->nb_philo)
 		{
 			if (is_finished(&philo[i]))
@@ -28,7 +30,17 @@ void	monitor(t_data *args, t_philo *philo)
 				args->is_dead = 1;
 				pthread_mutex_unlock(&args->stop);
 			}
+			pthread_mutex_lock(philo[i].mutex_stat);
+			if (args->nb_eat != -1 && philo[i].nb_eat >= args->nb_eat)
+				happy_meal++;
+			pthread_mutex_unlock(philo[i].mutex_stat);
 			i++;
+		}
+		if (args->nb_eat != -1 && happy_meal == args->nb_philo)
+		{
+			pthread_mutex_lock(&args->stop);
+			args->is_dead = 1;
+			pthread_mutex_unlock(&args->stop);
 		}
 		usleep(1000);
 	}
