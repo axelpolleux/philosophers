@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/02 16:59:34 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 18:08:48 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,27 @@ static void	init_philo(t_data *args, t_philo *philos)
 	}
 }
 
+static void	order_fork(t_philo *philo,
+	pthread_mutex_t **first, pthread_mutex_t **second)
+{
+	if (philo->id % 2)
+	{
+		*first = philo->right_fork;
+		*second = philo->left_fork;
+	}
+	else
+	{
+		*first = philo->left_fork;
+		*second = philo->right_fork;
+	}
+}
+
 void	content_routine(t_philo *philo)
 {
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
 
-	if (philo->id % 2)
-	{
-		first = philo->right_fork;
-		second = philo->left_fork;
-	}
-	else
-	{
-		first = philo->left_fork;
-		second = philo->right_fork;
-	}
+	order_fork(philo, &first, &second);
 	pthread_mutex_lock(first);
 	print_philo(philo, FORK);
 	pthread_mutex_lock(second);
