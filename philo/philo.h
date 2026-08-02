@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/07/31 14:07:29 by axel             ###   ########.fr       */
+/*   Updated: 2026/08/02 15:48:22 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,9 @@ typedef struct s_philo
 	pthread_mutex_t	*mutex_stat;
 }	t_philo;
 
-t_data	*parser(char **args, int len);
-int		ft_atol(char *str, int *out);
+// main
 void	philosophers(t_data *arguments);
-void	*philo_routine(void *arg);
+t_data	*parser(char **args, int len);
 
 // mutexes
 void	init_mutexes(t_data *args);
@@ -66,11 +65,16 @@ void	destroy_mutexes(t_data *args);
 void	create_threads(t_philo *philos, t_data *args);
 void	join_threads(t_philo *philos, t_data *args);
 void	print_philo(t_philo *philo, char *status);
-int		is_finished(t_philo *philo);
+void	philo_alone(t_data *args);
+void	*philo_routine(void *arg);
 
 
 // utils
+int		ft_atol(char *str, int *out);
 long	get_time_ms(void);
 void	ft_usleep(long ms, t_philo *philo);
+
+// death
 int		is_over(t_data *args);
+int		is_finished(t_philo *philo);
 #endif
