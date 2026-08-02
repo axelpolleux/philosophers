@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/02 19:09:27 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:13:37 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,20 @@ static void	order_fork(t_philo *philo,
 		*first = philo->left_fork;
 		*second = philo->right_fork;
 	}
+	pthread_mutex_lock(*first);
+	print_philo(philo, FORK);
+	pthread_mutex_lock(*second);
+	print_philo(philo, FORK);
 }
 
 void	content_routine(t_philo *philo)
 {
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
+	int				think_time;
 
+	think_time = 0;
 	order_fork(philo, &first, &second);
-	pthread_mutex_lock(first);
-	print_philo(philo, FORK);
-	pthread_mutex_lock(second);
-	print_philo(philo, FORK);
 	pthread_mutex_lock(philo->mutex_stat);
 	philo->last_meal = get_time_ms();
 	philo->nb_eat++;
@@ -67,6 +69,11 @@ void	content_routine(t_philo *philo)
 	print_philo(philo, SLEEP);
 	ft_usleep(philo->arguments->time_to_sleep, philo);
 	print_philo(philo, THINK);
+	think_time = (philo->arguments->time_to_die
+			- philo->arguments->time_to_eat
+			- philo->arguments->time_to_sleep) / 2;
+	if (think_time > 0)
+		ft_usleep(think_time, philo);
 }
 
 void	*philo_routine(void *arg)
@@ -80,7 +87,7 @@ void	*philo_routine(void *arg)
 		return (NULL);
 	}
 	if (philo->id % 2)
-		ft_usleep(10, philo);
+		ft_usleep(philo->arguments->time_to_eat / 2, philo);
 	while (!is_over(philo->arguments))
 		content_routine(philo);
 	return (NULL);

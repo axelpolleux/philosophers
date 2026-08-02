@@ -6,11 +6,25 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 15:34:34 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/02 19:44:10 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:02:05 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	finish(t_data *args, t_philo *philo, int i)
+{
+	if (is_finished(&philo[i]))
+	{
+		pthread_mutex_lock(&args->print_mutex);
+		pthread_mutex_lock(&args->stop);
+		args->is_dead = 1;
+		pthread_mutex_unlock(&args->stop);
+		printf("%ld %d %s\n",
+			get_time_ms() - args->start_time, philo[i].id, DEAD);
+		pthread_mutex_unlock(&args->print_mutex);
+	}
+}
 
 void	monitor(t_data *args, t_philo *philo)
 {
@@ -23,13 +37,7 @@ void	monitor(t_data *args, t_philo *philo)
 		happy_meal = 0;
 		while (i < args->nb_philo)
 		{
-			if (is_finished(&philo[i]))
-			{
-				print_philo(&philo[i], DEAD);
-				pthread_mutex_lock(&args->stop);
-				args->is_dead = 1;
-				pthread_mutex_unlock(&args->stop);
-			}
+			finish(args, philo, i);
 			pthread_mutex_lock(philo[i].mutex_stat);
 			if (args->nb_eat != -1 && philo[i].nb_eat >= args->nb_eat)
 				happy_meal++;
