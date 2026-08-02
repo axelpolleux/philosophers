@@ -7,6 +7,7 @@ SRCS			:=	main.c		\
 					philo.c		\
 					thread.c	\
 					parser.c	\
+					death.c		\
 					mutex.c
 
 OBJS			:=	$(SRCS:.c=.o)

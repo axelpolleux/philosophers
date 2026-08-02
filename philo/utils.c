@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 11:38:35 by axel              #+#    #+#             */
-/*   Updated: 2026/08/01 14:59:18 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 15:35:06 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,4 @@ void	ft_usleep(long ms, t_philo *philo)
 			break ;
 		usleep(500);
 	}
-}
-
-int	is_finished(t_philo *philo)
-{
-	long	last_meal;
-
-	pthread_mutex_lock(philo->mutex_stat);
-	last_meal = philo->last_meal;
-	pthread_mutex_unlock(philo->mutex_stat);
-	if (get_time_ms() - last_meal > philo->arguments->time_to_die)
-		return (1);
-	return (0);
-}
-
-int	is_over(t_data *args)
-{
-	int	res;
-
-	pthread_mutex_lock(&args->stop);
-	res = args->is_dead;
-	pthread_mutex_unlock(&args->stop);
-	return (res);
 }
