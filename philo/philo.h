@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:52:15 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/02 15:48:22 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:00:21 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	print_philo(t_philo *philo, char *status);
 void	philo_alone(t_data *args);
 void	*philo_routine(void *arg);
 
-
 // utils
 int		ft_atol(char *str, int *out);
 long	get_time_ms(void);
@@ -77,4 +76,6 @@ void	ft_usleep(long ms, t_philo *philo);
 // death
 int		is_over(t_data *args);
 int		is_finished(t_philo *philo);
+void	monitor(t_data *args, t_philo *philo);
+
 #endif

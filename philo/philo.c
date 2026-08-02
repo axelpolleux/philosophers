@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 07:51:54 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/01 19:22:44 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/02 16:59:34 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,6 @@ void	*philo_routine(void *arg)
 	while (!is_over(philo->arguments))
 		content_routine(philo);
 	return (NULL);
-}
-
-static void	monitor(t_data *args, t_philo *philo)
-{
-	int	i;
-
-	while (!is_over(args))
-	{
-		i = 0;
-		while (i < args->nb_philo)
-		{
-			if (is_finished(&philo[i]))
-			{
-				print_philo(&philo[i], DEAD);
-				pthread_mutex_lock(&args->stop);
-				args->is_dead = 1;
-				pthread_mutex_unlock(&args->stop);
-			}
-			i++;
-		}
-		usleep(1000);
-	}
 }
 
 void	philosophers(t_data *args)
